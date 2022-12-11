@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <StDiv>
-      <StButton onClick={linkGo}>TodoList로 이동</StButton>
+      <StButton onClick={linkGo}>Go to Food-ing</StButton>
     </StDiv>
   );
 };

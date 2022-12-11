@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <StDiv>
       <Link to={`/`}>
-        <StSpan style={{ cursor: "pointer" }}>Home</StSpan>
+        <StSpan style={{ cursor: "pointer" }}>Food-ing</StSpan>
       </Link>
       {/* <span>My Todo List</span> */}
       <span>React</span>

@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-// import TodoList from "../pages/TodoList";
+import RecipeList from "../pages/RecipeList";
 import Layout from "../components/layout/Layout";
-// import Todo from "../components/todo/Todo";
+import Recipe from "../components/recipe/Recipe";
 
 const Router = () => {
   return (
@@ -11,8 +11,8 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="lists" element={<TodoList />} /> */}
-          {/* <Route path="lists/:id" element={<Todo />} /> */}
+          <Route path="lists" element={<RecipeList />} />
+          <Route path="lists/:id" element={<Recipe />} />
         </Routes>
       </Layout>
     </BrowserRouter>
