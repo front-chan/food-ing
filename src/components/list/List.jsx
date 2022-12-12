@@ -1,72 +1,88 @@
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
+import "./List.css";
 
-const List = (props) => {
+const List = ({ title, imageUrl, body }) => {
   return (
-    <div>
-      <StDiv key={props.list.id}>
-        {/* <a href="https://www.naver.com">상세보기</a> */}
-        <Link to={`/lists/${props.list.id}`}>
-          <StSpan>상세보기</StSpan>
-        </Link>
-        <StH4>{props.list.title}</StH4>
-        <StH6>{props.list.recipe}</StH6>
-        <div>
-          <StButton delete onClick={() => props.onDeleteRecipe(props.list.id)}>
-            삭제하기
-          </StButton>
-          <StButton complete onClick={() => props.onChangeRecipe(props.list)}>
-            {props.list.done ? "완료" : "취소"}
-          </StButton>
-        </div>
-      </StDiv>
-    </div>
+    <Cardcontainer>
+      <div>
+        <Imagecontainer src={imageUrl} alt="" />
+      </div>
+      <Cardcontent>
+        <Title>
+          <h3>{title}</h3>
+        </Title>
+        <Body>
+          <p style={{ wordBreak: "break-all" }}>{body}</p>
+        </Body>
+      </Cardcontent>
+      <Btn>
+        <Button>
+          <div>
+            <Href href="https://www.youtube.com/watch?v=Q3I_NwaCZI8">
+              View more
+            </Href>
+          </div>
+        </Button>
+      </Btn>
+    </Cardcontainer>
   );
 };
 
-const StH4 = styled.h4`
-  font-size: 1.8rem;
-  margin: 10px;
+const Cardcontainer = styled.div`
+  width: 250px;
+  height: 400px;
+  box-shadow: 0px 0px 15px -5px;
+  transition: 0.3s;
+  animation: ease-in;
+  &:hover {
+    transform: scale(1, 1);
+    box-shadow: 0px 0px 15px 0px;
+  }
+  margin-top: 70px;
+  margin-left: 10px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
 `;
-
-const StH6 = styled.h6`
-  font-size: 1.15rem;
-  margin: 10px;
+const Imagecontainer = styled.img`
+  overflow: hidden;
+  height: 200px;
+  width: 250px;
+  border-top-left-radius: 30px;
 `;
-
-const StButton = styled.button`
-  background-color: transparent;
-  border-radius: 10px;
-  width: 130px;
-  padding: 10px 30px;
-  margin: 10px;
-  cursor: pointer;
-  ${(props) =>
-    props.delete &&
-    css`
-      border: 2px solid red;
-    `};
-  ${(props) =>
-    props.complete &&
-    css`
-      border: 2px solid green;
-    `};
+const Cardcontent = styled.div`
+  margin: 1rem;
+  margin-top: 0.3rem;
 `;
-
-const StDiv = styled.div`
-  width: 330px;
-  height: 160px;
+const Title = styled.div`
+  color: #07254e;
+  text-align: center;
+`;
+const Body = styled.div`
+  color: #003881;
+`;
+const Btn = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 20px;
-  border: 5px solid rgb(1, 87, 65);
-  border-radius: 10px;
 `;
-
-const StSpan = styled.span`
-  color: black;
-  cursor: pointer;
+const Button = styled.div`
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  transition: 0.2s;
+  margin-bottom: 0.5rem;
+  border-radius: 30px;
+  margin-bottom: 15px;
+  &:hover {
+    background: rgba(14, 15, 16, 0.1);
+    transform: scale();
+  }
+`;
+const Href = styled.a`
+  text-transform: uppercase;
+  color: #3282bc;
+  text-decoration: none;
+  font-weight: bold;
 `;
 
 export default List;

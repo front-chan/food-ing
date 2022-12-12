@@ -1,108 +1,203 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+//import React, { useEffect } from "react";
+import styled from "styled-components";
 
+// import { useSelector } from "react-redux";
+// import { useNavigate, useParams } from "react-router-dom";
+
+// //import { getTodoByID } from "../redux/modules/counter.js";
+
+// const Detail = () => {
+//   // const dispatch = useDispatch();
+//   const user = useSelector((state) => state.counter.users);
+//   const navigate = useNavigate();
+//   const param = useParams();
+//   // const { id } = useParams();
+
+//   const getid = user.find((user) => user.id === parseInt(param.id));
+//   // useEffect(() => {
+//   //   dispatch(addButton(user));
+//   // }, [dispatch, user]);
 const Recipe = () => {
-  const param = useParams();
-  const recipes = useSelector((state) => state.recipe.recipes);
-  // console.log(todos);
-  const recipeList = recipes.find((list) => list.id === parseInt(param.id));
-  console.log(recipeList);
   return (
-    <StDiv recipe>
-      {/* {todoIdList.map((todo) => {
-        return (
-          <div> */}
-      <StDiv card>
+    <StContainer>
+      <StDialog>
         <div>
-          <StDiv cardId>
-            <h3>id: {recipeList.id}</h3>
-            <Link to={`/lists`}>
-              <StButton>이전으로</StButton>
-            </Link>
-          </StDiv>
-          {/* <StH1>{todoIdList.title}</StH1> */}
-          {/* {(todos) =>
-            todos.done === false ? (
-              <StH1 style={{ textDecoration: "line-through" }}>
-                {todoIdList.title}
-              </StH1>
-            ) : (
-              <StH1>{todoIdList.title}</StH1>
-            )
-          } */}
-          <StH1>{recipeList.title}</StH1>
-          <StP>{recipeList.recipe}</StP>
+          <StDialogHeader>
+            <div>ID : id랜덤노출 </div>
+            <StButton
+              borderColor="#ddd"
+              onClick={() => {
+                //navigate("/todolist");
+              }}
+            >
+              이전으로
+            </StButton>
+          </StDialogHeader>
+          <StTitle>제목</StTitle>
+          <StBody>
+            <StLeftBox>left</StLeftBox>
+            <StRightBox>right</StRightBox>
+          </StBody>
         </div>
-        <StP complete>
-          {recipeList.done ? "아직 완료되지 않았습니다" : "완료되었습니다"}
-        </StP>
-      </StDiv>
-      {/* </div>
-        );
-      })} */}
-    </StDiv>
+        <StCommentBox>
+          <div>
+            <CommentSize>COMMENT</CommentSize>
+            <StCommentFunction></StCommentFunction>
+            <StCommentButton>등록</StCommentButton>
+            <br></br>
+            <br></br>
+
+            <CommentMarkBox>
+              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
+              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
+              dddd<br></br>
+            </CommentMarkBox>
+          </div>
+        </StCommentBox>
+      </StDialog>
+    </StContainer>
   );
 };
 
-const StDiv = styled.div`
-  ${(props) =>
-    props.recipe &&
-    css`
-      border: 2px solid rgb(238, 238, 238);
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `}
-  ${(props) =>
-    props.card &&
-    css`
-      width: 600px;
-      height: 400px;
-      border: 1px solid rgb(201, 201, 201);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    `}
-    ${(props) =>
-    props.cardId &&
-    css`
-      display: flex;
-      height: 80px;
-      justify-content: space-between;
-      padding: 0px 24px;
-      align-items: center;
-    `}
+const StContainer = styled.div`
+  border: 5px solid #eee;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c0e9fc;
+`;
+
+const StDialog = styled.div`
+  width: 1000px;
+  height: 760px;
+  border: 5px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #eee;
+  /* @media screen and (max-width: 768px) {
+    width: 95%;
+  } */
+`;
+
+const StDialogHeader = styled.div`
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  background-color: blue;
+  padding: 0 24px;
+  align-items: center;
+`;
+
+const StTitle = styled.h1`
+  padding: 0 24px;
+`;
+
+const StBody = styled.main`
+  padding: 0 24px;
 `;
 
 const StButton = styled.button`
-  border: 1px solid rgb(201, 201, 201);
+  border: 1px solid ${({ borderColor }) => borderColor};
   height: 40px;
   width: 120px;
-  background-color: rgb(255, 255, 255);
+  background-color: #c0e9fc;
   border-radius: 12px;
   cursor: pointer;
 `;
-
-const StH1 = styled.h1`
-  padding: 0px 24px;
+const StLeftBox = styled.div`
+  background: red;
+  float: left;
+  height: 350px;
+  width: 470px;
+  margin-bottom: 10px;
 `;
 
-const StP = styled.p`
-  padding: 0px 24px;
-  ${(props) =>
-    props.complete &&
-    css`
-      text-align: right;
-      height: 30px;
-      font-weight: bold;
-      color: #c40303;
-      /* text-decoration: line-through; */
-    `}
+const StRightBox = styled.div`
+  background: green;
+  float: right;
+  height: 350px;
+  width: 470px;
+  margin-bottom: 10px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
 `;
 
+const StCommentBox = styled.div`
+  margin-top: -50px;
+  padding-left: 25px;
+  background: blue;
+  /* padding: 0px; */
+  height: 270px;
+  /* @media screen and (max-width: 800px) {
+    width: 200px;
+  } */
+`;
+
+const StCommentFunction = styled.input`
+  width: 700px;
+  height: 50px;
+  font-size: 17px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+`;
+
+const StCommentButton = styled.button`
+  position: relative;
+  border: none;
+  min-width: 150px;
+  min-height: 50px;
+  margin-left: 55px;
+  background: linear-gradient(90deg, #c0e9fc 0%, #6ccefc 100%);
+  border-radius: 1000px;
+  color: darkslategray;
+  cursor: pointer;
+  box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+  font-weight: 700;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 8px solid #c0e9fc;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
+`;
+
+const CommentMarkBox = styled.div`
+  overflow: scroll;
+  width: 700px;
+  height: 120px;
+  font-size: 17px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const CommentSize = styled.h2`
+  font-size: 20px;
+`;
 export default Recipe;

@@ -1,11 +1,9 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
-import recipe from "../modules/recipe";
+import { configureStore } from "@reduxjs/toolkit";
+import recipes from "../modules/recipeSlice";
 
-const rootReducer = combineReducers({
-  //   counter: counter, // Store와 module을 연결시켜 줌
-  recipe,
+const store = configureStore({
+  reducer: { recipes },
+  // {} 안에 reviews 추가
 });
-const store = createStore(rootReducer);
 
 export default store;
