@@ -136,16 +136,16 @@ const RecipeList = () => {
         <section>
           <h1>Woring...🔥</h1>
           <StDiv section>
-            {recipeList.map((list) =>
-              list.done ? (
+            {recipeList.map((list) => {
+              return list.done ? (
                 <List
                   key={list.id}
                   list={list}
                   onDeleteRecipe={onDeleteRecipe}
                   onChangeRecipe={onChangeRecipe}
                 ></List>
-              ) : null
-            )}
+              ) : null;
+            })}
           </StDiv>
         </section>
         {/* <section>

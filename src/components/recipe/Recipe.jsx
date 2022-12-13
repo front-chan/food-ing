@@ -1,10 +1,8 @@
-//import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-// import { useSelector } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-
-// //import { getTodoByID } from "../redux/modules/counter.js";
 
 // const Detail = () => {
 //   // const dispatch = useDispatch();
@@ -17,40 +15,147 @@ import styled from "styled-components";
 //   // useEffect(() => {
 //   //   dispatch(addButton(user));
 //   // }, [dispatch, user]);
+
 const Recipe = () => {
+  const param = useParams();
+  const navigate = useNavigate();
+
+  const [recipes, setRecipes] = useState([]);
+  console.log("recipe: ", recipes);
+
+  const [review, setReview] = useState({ title: "" });
+  //   console.log(review);
+  const [reviews, setReviews] = useState([]);
+  //   console.log(reviews);
+
+  //   const recipeList = recipes.find((recipe) => recipe.id === parseInt(param.id));
+  //   console.log("recipeList:", recipeList);
+
+  //   const fetchRecipes = async () => {
+
+  /*
+  const fetchReviews = async () => {
+    const { data } = await axios.get("http://localhost:3000/reviews");
+    setReviews(data);
+    // return data.find((post) => post.id === param.id);
+  };
+  */
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      await axios
+        .get(`http://localhost:3000/recipes/${param.id}`)
+        .then(function (res) {
+          console.log("res: ", res.data);
+          setRecipes(res.data);
+        })
+        .catch(function (error) {
+          console.log("error: ", error);
+        });
+    };
+    fetchRecipes();
+    // fetchReviews();
+  }, [param.id]);
+
+  const onSubmitHandler = (review) => {
+    axios.post(`http://localhost:3000/recipes/${param.id}`, review);
+    setReviews([{ ...recipes.reviews }, review]);
+  };
+
+  const onDeleteHandler = (reviewId) => {
+    axios.delete(`http://localhost:3000/recipes/${reviewId}`);
+    const newReview = recipes.reviews?.filter(
+      (review) => recipes.review.id !== reviewId
+    );
+    setReviews(newReview);
+  };
+  //   const recipeList = async () => {
+  //     const { res } = await axios.get("http://localhost:3005/recipes");
+  //     return res;
+  //   };
+  //   console.log(recipeList);
+
+  /*
+  const fetchRecipes = async () => {
+    const { data } = await axios.get("http://localhost:3005/recipes");
+    setRecipes(data);
+    // const recipeList = data.find((recipe) => recipe.id === parseInt(param.id));
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+  */
+
   return (
     <StContainer>
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : id랜덤노출 </div>
-            <StButton
-              borderColor="#ddd"
-              onClick={() => {
-                //navigate("/todolist");
-              }}
-            >
-              이전으로
-            </StButton>
+            <div>ID : {recipes.id}</div>
+            <div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  navigate(`/board/${param.id}`);
+                }}
+              >
+                수정하기
+              </StButton>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  navigate("/lists");
+                }}
+              >
+                이전으로
+              </StButton>
+            </div>
           </StDialogHeader>
-          <StTitle>제목</StTitle>
+          <StTitle>{recipes.title}</StTitle>
           <StBody>
-            <StLeftBox>left</StLeftBox>
-            <StRightBox>right</StRightBox>
+            <StLeftBox>
+              <img src={recipes.imgurl} alt="img" />
+            </StLeftBox>
+            <StRightBox>{recipes.recipe}</StRightBox>
           </StBody>
         </div>
         <StCommentBox>
           <div>
             <CommentSize>COMMENT</CommentSize>
-            <StCommentFunction></StCommentFunction>
-            <StCommentButton>등록</StCommentButton>
-            <br></br>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmitHandler(review);
+              }}
+            >
+              <StCommentFunction
+                type="text"
+                onChange={(ev) => {
+                  const { value } = ev.target;
+                  setReview({
+                    ...recipes.review,
+                    id: Math.floor(Math.random() * 100000),
+                    title: value,
+                  });
+                }}
+              ></StCommentFunction>
+              <StCommentButton>등록</StCommentButton>
+            </form>
             <br></br>
 
             <CommentMarkBox>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>dddd<br></br>
-              dddd<br></br>
+              {recipes.reviews?.map((review) => (
+                <div key={review.id}>
+                  {review.id}: {review.title}
+                  <button
+                    type="button"
+                    onClick={() => onDeleteHandler(review.id)}
+                  >
+                    삭제
+                  </button>
+                </div>
+              ))}
             </CommentMarkBox>
           </div>
         </StCommentBox>
@@ -106,6 +211,7 @@ const StButton = styled.button`
   background-color: #c0e9fc;
   border-radius: 12px;
   cursor: pointer;
+  margin-left: 5px;
 `;
 const StLeftBox = styled.div`
   background: red;
