@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { apis } from "../../lib/axios";
 
 const Edit = () => {
   const param = useParams();
-  const [editRecipe, setEditRecipe] = useState({
-    title: "",
-    imgurl: "",
-    recipe: "",
-  });
+  const [editRecipe, setEditRecipe] = useState({});
 
   const [recipes, setRecipes] = useState([]);
   console.log("recipes: ", recipes);
@@ -26,6 +21,7 @@ const Edit = () => {
   };
   */
 
+  /*
   useEffect(() => {
     const fetchRecipes = async () => {
       await axios
@@ -39,6 +35,14 @@ const Edit = () => {
         });
     };
     fetchRecipes();
+  }, [param.id]);
+  */
+
+  useEffect(() => {
+    apis.getIdRecipes(param.id).then((res) => {
+      const get = res.data;
+      setRecipes(get);
+    });
   }, [param.id]);
 
   // 수정하기 핸들러 apis instance 버전

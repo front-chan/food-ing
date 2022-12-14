@@ -25,9 +25,9 @@ const Recipe = () => {
   console.log("recipe: ", recipes);
 
   const [review, setReview] = useState({ title: "" });
-  //   console.log(review);
+  // console.log("review: ", review);
   const [reviews, setReviews] = useState([]);
-  //   console.log(reviews); [recipes.reviews]
+  console.log("reviews: ", reviews);
 
   //   const recipeList = recipes.find((recipe) => recipe.id === parseInt(param.id));
   //   console.log("recipeList:", recipeList);
@@ -89,9 +89,17 @@ const Recipe = () => {
     });
   };
 
+  // ---------------REVIEW-------------
+  useEffect(() => {
+    apis.getReviews(param.id).then((res) => {
+      const get = res.data;
+      setReviews(get);
+    });
+  }, [param.id]);
+
   // 리뷰 추가 핸들러
   const onSubmitHandler = (review) => {
-    axios.post(`http://localhost:3000/recipes/${param.id}`, review);
+    axios.post(`http://localhost:3000/reviews/`, review);
     console.log("recipes.reviews: ", recipes.reviews);
     console.log("review: ", review);
     // setReviews([{ ...recipes.reviews }, review]);
@@ -99,10 +107,8 @@ const Recipe = () => {
 
   // 리뷰 삭제 핸들러
   const onDeleteHandler = (reviewId) => {
-    axios.delete(`http://localhost:3000/recipes/${reviewId}`);
-    const newReview = recipes.reviews?.filter(
-      (review) => recipes.review.id !== reviewId
-    );
+    axios.delete(`http://localhost:3000/reviews/${reviewId}`);
+    const newReview = reviews?.filter((review) => review.id !== reviewId);
     setReviews(newReview);
   };
   //   const recipeList = async () => {
@@ -186,9 +192,10 @@ const Recipe = () => {
                 onChange={(ev) => {
                   const { value } = ev.target;
                   setReview({
-                    ...recipes.review,
+                    ...review,
                     id: Math.floor(Math.random() * 100000),
                     title: value,
+                    postId: param.id,
                   });
                 }}
               ></StCommentFunction>
@@ -197,7 +204,7 @@ const Recipe = () => {
             <br></br>
 
             <CommentMarkBox>
-              {recipes.reviews?.map((review) => (
+              {reviews?.map((review) => (
                 <div key={review.id}>
                   {review.id}: {review.title}
                   <button

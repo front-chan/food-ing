@@ -4,25 +4,7 @@
       "title": "샤싣dsdtestest",
       "imgurl": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60",
       "recipe": "sdfgse 왜 안되노",
-      "id": 1969,
-      "reviews": [
-        {
-          "title": "맛있겠다",
-          "id": 1
-        },
-        {
-          "title": "저렇게 만들면되나요",
-          "id": 2
-        },
-        {
-          "title": "잡내는 어떻게 없애나요",
-          "id": 3
-        },
-        {
-          "title": "아 만들기 너무 어려워 보이네요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠ",
-          "id": 4
-        }
-      ]
+      "id": 1969
     },
     {
       "title": "테서터수정새로고침테스트",
@@ -36,6 +18,50 @@
       "recipe": "apis test",
       "review": [],
       "id": 1112
+    },
+    {
+      "title": "잘 들어가나요tttt",
+      "imgurl": "잘 들어갑니까",
+      "recipe": "에헤이",
+      "review": [],
+      "id": 8971
+    }
+  ],
+  "reviews": [
+    {
+      "title": "맛있겠다",
+      "id": 1,
+      "postId": 4586
+    },
+    {
+      "title": "저렇게 만들면되나요",
+      "id": 2,
+      "postId": 8971
+    },
+    {
+      "title": "잡내는 어떻게 없애나요",
+      "id": 3,
+      "postId": 5461
+    },
+    {
+      "title": "아 만들기 너무 어려워 보이네요 ㅠㅠㅠㅠㅠㅠㅠㅠㅠ",
+      "id": 4,
+      "postId": 8971
+    },
+    {
+      "id": 21193,
+      "title": "tst",
+      "postId": "8971"
+    },
+    {
+      "id": 44057,
+      "title": "di",
+      "postId": "8971"
+    },
+    {
+      "id": 60242,
+      "title": "ㅅㄷㄴㅅ",
+      "postId": "8971"
     }
   ]
 }

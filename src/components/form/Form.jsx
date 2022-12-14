@@ -1,65 +1,110 @@
-import styled from "styled-components";
+// import styled, { css } from "styled-components";
 
-const Form = (props) => {
-  return (
-    <StForm onSubmit={props.onSubmit}>
-      <div>
-        <StLabel htmlFor="title">제목</StLabel>
-        <StInput
-          type="text"
-          id="title"
-          value={props.title || ""}
-          onChange={(e) => props.setTitle(e.target.value)}
-          // required
-        />
-        <StLabel htmlFor="recipe">내용</StLabel>
-        <StInput
-          type="text"
-          id="recipe"
-          value={props.recipe || ""}
-          onChange={(e) => props.setRecipe(e.target.value)}
-          // required
-        />
-      </div>
-      <StButton>추가하기</StButton>
-    </StForm>
-  );
-};
+// const Form = (props) => {
+//   return (
+//     <StForm
+//       onSubmit={(e) => {
+//         e.preventDefault();
+//         props.onSubmitHandler(props.recipe);
+//       }}
+//     >
+//       <StH1>당신의 레시피를 추천해주세요!</StH1>
+//       <StLabel htmlFor="title">Title</StLabel>
+//       <StInput
+//         type="text"
+//         name="title"
+//         id="title"
+//         onChange={(ev) => {
+//           const { value } = ev.target;
+//           props.setRecipe({
+//             ...props.recipe,
+//             id: Math.floor(Math.random() * 10000),
+//             title: value,
+//           });
+//         }}
+//       />
+//       <StLabel htmlFor="url">Image URL</StLabel>
+//       <StInput
+//         type="text"
+//         name="url"
+//         id="url"
+//         onChange={(ev) => {
+//           const { value } = ev.target;
+//           props.setRecipe({
+//             ...props.recipe,
+//             id: Math.floor(Math.random() * 10000),
+//             imgurl: value,
+//           });
+//         }}
+//       />
+//       <StLabel htmlFor="recipe">Recipe</StLabel>
+//       <StTextarea
+//         name="recipe"
+//         id="recipe"
+//         cols="40"
+//         rows="10"
+//         onChange={(ev) => {
+//           const { value } = ev.target;
+//           props.setRecipe({
+//             ...props.recipe,
+//             id: Math.floor(Math.random() * 10000),
+//             recipe: value,
+//           });
+//         }}
+//       ></StTextarea>
+//       <div>
+//         <StButton add>Add Recipe</StButton>
+//         <Link to={`/lists`}>
+//           <StButton back>Back</StButton>
+//         </Link>
+//       </div>
+//     </StForm>
+//   );
+// };
 
-const StForm = styled.form`
-  border-radius: 10px;
-  background-color: rgb(227, 227, 227);
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 30px;
-  padding-right: 30px;
-`;
+// const StForm = styled.form`
+//   /* background-color: aqua; */
+//   max-width: 1000px;
+//   width: 95%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 90vh;
+//   margin-top: -100px;
+// `;
 
-const StLabel = styled.label`
-  font-size: 1.1rem;
-  margin: 10px;
-  font-weight: bold;
-`;
+// const StH1 = styled.h1`
+//   color: #02415c;
+//   font-size: 50px;
+//   margin-bottom: 70px;
+//   /* background-color: #b0c4cc;
+//   border-radius: 20px; */
+// `;
+// const StLabel = styled.label`
+//   color: #02415c;
+//   font-size: 20px;
+//   margin: 10px;
+//   font-weight: bold;
+// `;
 
-const StInput = styled.input`
-  margin: 10px;
-  width: 250px;
-  height: 40px;
-  border: 0;
-  border-radius: 10px;
-`;
+// const StInput = styled.input`
+//   width: 500px;
+//   height: 30px;
+//   border-radius: 10px;
+//   border: 0;
+//   background-color: #d6edf8;
+//   font-size: 20px;
+//   padding: 10px;
+// `;
 
-const StButton = styled.button`
-  width: 130px;
-  color: white;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 10px 30px;
-  background-color: rgb(1, 87, 65);
-  border: 0;
-  cursor: pointer;
-`;
+// const StTextarea = styled.textarea`
+//   width: 500px;
+//   border-radius: 10px;
+//   border: 0;
+//   background-color: #d6edf8;
+//   font-size: 20px;
+//   padding: 10px;
+// `;
 
-export default Form;
+// export default Form;

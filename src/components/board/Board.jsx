@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { apis } from "../../lib/axios";
+// import Form from "../form/Form";
+// import axios from "axios";
 // import { useDispatch, useSelector } from "react-redux";
 // import { apis, __getRecipes } from "../../redux/modules/recipeSlice";
-import { apis } from "../../lib/axios";
 // import { addRecipe } from "../../redux/modules/recipeSlice";
 // import { postCreators } from "../../redux/modules/recipeSlice";
 
@@ -17,7 +18,6 @@ const Board = () => {
     title: "",
     imgurl: "",
     recipe: "",
-    review: [],
   });
   const [recipes, setRecipes] = useState([]);
   console.log("recipes: ", recipes);
@@ -84,6 +84,11 @@ const Board = () => {
 */
 
   return (
+    // <Form
+    //   onSubmitHandler={onSubmitHandler}
+    //   recipe={recipe}
+    //   setRecipe={setRecipe}
+    // ></Form>
     <StForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -219,4 +224,5 @@ const StButton = styled.button`
       background-color: #b9c6cb;
     `}
 `;
+
 export default Board;
