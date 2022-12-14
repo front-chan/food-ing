@@ -35,6 +35,7 @@ const Board = () => {
     });
   }, []);
 
+  // 댓글 추가 apis 버전
   const onSubmitHandler = (recipe) => {
     apis.createRecipes(recipe).then((res) => {
       window.location.href = "/lists";
@@ -44,6 +45,7 @@ const Board = () => {
       // setRecipes([...recipes, recipe]);
     });
 
+    // 댓글추가 기본 버전
     // axios.post("http://localhost:3000/recipes", recipe);
     // setRecipes([...recipes, recipe]);
     // try {
