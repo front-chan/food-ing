@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { apis } from "../../lib/axios";
 
 // const Detail = () => {
 //   // const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Recipe = () => {
   };
   */
 
+  /*
   useEffect(() => {
     const fetchRecipes = async () => {
       await axios
@@ -56,7 +58,16 @@ const Recipe = () => {
     fetchRecipes();
     // fetchReviews();
   }, [param.id]);
+*/
 
+  useEffect(() => {
+    apis.getIdRecipes(param.id).then((res) => {
+      const get = res.data;
+      setRecipes(get);
+    });
+  }, [param.id]);
+
+  /*
   // 레시피 전체 삭제 핸들러
   const onDeleteRecipeHandler = (recipeId) => {
     axios.delete(`http://localhost:3000/recipes/${recipeId}`);
@@ -69,11 +80,21 @@ const Recipe = () => {
       console.log(error);
     }
   };
+  */
+
+  // 레시피 전체 삭제 핸들러 apis instance 버전
+  const onDeleteRecipe = (recipeId) => {
+    apis.deleteRecipes(recipeId).then((res) => {
+      window.location.href = "/lists";
+    });
+  };
 
   // 리뷰 추가 핸들러
   const onSubmitHandler = (review) => {
     axios.post(`http://localhost:3000/recipes/${param.id}`, review);
-    setReviews([{ ...recipes.reviews }, review]);
+    console.log("recipes.reviews: ", recipes.reviews);
+    console.log("review: ", review);
+    // setReviews([{ ...recipes.reviews }, review]);
   };
 
   // 리뷰 삭제 핸들러
@@ -117,7 +138,8 @@ const Recipe = () => {
               <StButton
                 borderColor="#ddd"
                 onClick={() => {
-                  onDeleteRecipeHandler(param.id);
+                  // onDeleteRecipeHandler(param.id);
+                  onDeleteRecipe(param.id);
                 }}
               >
                 삭제하기

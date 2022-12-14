@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { apis } from "../../lib/axios";
 
 const Edit = () => {
   const param = useParams();
@@ -16,7 +17,7 @@ const Edit = () => {
   console.log("recipes: ", recipes);
 
   /*
-  // 코드복사 12~15까지
+  // 코드복사 12~15까지 기본 axios 버전
   const fetchRecipes = async () => {
     const { data } = await axios.get(
       `http://localhost:3000/recipes/${param.id}`
@@ -40,6 +41,15 @@ const Edit = () => {
     fetchRecipes();
   }, [param.id]);
 
+  // 수정하기 핸들러 apis instance 버전
+  const onEditRecipe = (id, recipe) => {
+    apis.editRecipes(id, recipe).then((res) => {
+      window.location.href = "/lists";
+    });
+  };
+
+  /*
+  // axios 수정하기 버전
   const onSubmitHandler = (edit) => {
     axios
       .patch(`http://localhost:3000/recipes/${param.id}`, edit)
@@ -53,6 +63,8 @@ const Edit = () => {
         console.log(err);
       });
   };
+  */
+
   /*
     // setRecipes([...recipes, recipe]);
     try {
@@ -118,7 +130,8 @@ const Edit = () => {
           add
           onClick={(e) => {
             e.preventDefault();
-            onSubmitHandler(editRecipe);
+            // onSubmitHandler(editRecipe);
+            onEditRecipe(param.id, editRecipe);
           }}
         >
           수정하기

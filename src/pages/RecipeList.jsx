@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import styled from "styled-components";
 import List from "../components/list/List";
 import { Link } from "react-router-dom";
+import { apis } from "../lib/axios";
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
-
   console.log(recipes);
 
+  useEffect(() => {
+    apis.getRecipes().then((res) => {
+      const get = res.data;
+      setRecipes(get);
+    });
+  }, []);
+
+  /*
   const fetchRecipes = async () => {
     const { data } = await axios.get("http://localhost:3000/recipes");
     setRecipes(data);
@@ -17,6 +25,7 @@ const RecipeList = () => {
   useEffect(() => {
     fetchRecipes();
   }, []);
+  */
 
   return (
     <div>

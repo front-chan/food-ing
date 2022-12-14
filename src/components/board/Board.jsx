@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { apis, __getRecipes } from "../../redux/modules/recipeSlice";
+import { apis } from "../../lib/axios";
+// import { addRecipe } from "../../redux/modules/recipeSlice";
+// import { postCreators } from "../../redux/modules/recipeSlice";
 
 const Board = () => {
+  // const dispatch = useDispatch();
+  // const list = useSelector((state) => state);
+  // console.log("list: ", list);
+
   const [recipe, setRecipe] = useState({
     title: "",
     imgurl: "",
@@ -11,8 +20,46 @@ const Board = () => {
     review: [],
   });
   const [recipes, setRecipes] = useState([]);
-  console.log(recipes);
+  console.log("recipes: ", recipes);
 
+  // const { data } = dispatch(__getRecipes());
+  // console.log("BoardData: ", data);
+  // const recipes = useSelector((state) => state);
+  // console.log("recipes: ".recipes);
+
+  // 데이터 처음 한번만 가져오기
+  useEffect(() => {
+    apis.getRecipes().then((res) => {
+      const get = res.data;
+      setRecipes(get);
+    });
+  }, []);
+
+  const onSubmitHandler = (recipe) => {
+    apis.createRecipes(recipe).then((res) => {
+      window.location.href = "/lists";
+      // console.log("test res: ", res);
+      // console.log("test recipe: ", recipe);
+      // dispatch(addRecipe([...recipe, res]));
+      // setRecipes([...recipes, recipe]);
+    });
+
+    // axios.post("http://localhost:3000/recipes", recipe);
+    // setRecipes([...recipes, recipe]);
+    // try {
+    //   // 새로고침 되었을 때 경로 이동
+    //   window.location.href = "/lists";
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  /*
+  useEffect(() => {
+    dispatch(__getRecipes());
+  }, [dispatch]);
+*/
+  /*
   // 코드복사 12~15까지
   const fetchRecipes = async () => {
     const { data } = await axios.get("http://localhost:3000/recipes");
@@ -34,6 +81,7 @@ const Board = () => {
   useEffect(() => {
     fetchRecipes();
   }, []);
+*/
 
   return (
     <StForm
