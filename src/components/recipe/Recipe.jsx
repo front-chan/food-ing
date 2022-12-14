@@ -26,7 +26,7 @@ const Recipe = () => {
   const [review, setReview] = useState({ title: "" });
   //   console.log(review);
   const [reviews, setReviews] = useState([]);
-  //   console.log(reviews);
+  //   console.log(reviews); [recipes.reviews]
 
   //   const recipeList = recipes.find((recipe) => recipe.id === parseInt(param.id));
   //   console.log("recipeList:", recipeList);
@@ -57,11 +57,26 @@ const Recipe = () => {
     // fetchReviews();
   }, [param.id]);
 
+  // 레시피 전체 삭제 핸들러
+  const onDeleteRecipeHandler = (recipeId) => {
+    axios.delete(`http://localhost:3000/recipes/${recipeId}`);
+    // const newRecipe = recipes?.filter((recipe) => recipe.id !== recipeId);
+    // setRecipes(recipes);
+    try {
+      // 새로고침 되었을 때 경로 이동
+      window.location.href = "/lists";
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 리뷰 추가 핸들러
   const onSubmitHandler = (review) => {
     axios.post(`http://localhost:3000/recipes/${param.id}`, review);
     setReviews([{ ...recipes.reviews }, review]);
   };
 
+  // 리뷰 삭제 핸들러
   const onDeleteHandler = (reviewId) => {
     axios.delete(`http://localhost:3000/recipes/${reviewId}`);
     const newReview = recipes.reviews?.filter(
@@ -92,7 +107,22 @@ const Recipe = () => {
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID : {recipes.id}</div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <div>ID : {recipes.id}</div>
+              <StButton
+                borderColor="#ddd"
+                onClick={() => {
+                  onDeleteRecipeHandler(param.id);
+                }}
+              >
+                삭제하기
+              </StButton>
+            </div>
             <div>
               <StButton
                 borderColor="#ddd"

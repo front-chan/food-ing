@@ -46,6 +46,7 @@ const Edit = () => {
       .then((res) => {
         console.log("res: ", res);
         console.log("editRecipe: ", editRecipe);
+        window.location.href = "/lists";
         // fetchRecipes()
       })
       .catch((err) => {
@@ -71,6 +72,7 @@ const Edit = () => {
         type="text"
         name="title"
         id="title"
+        defaultValue={recipes.title ? recipes.title : ""}
         // value={recipes.title || ""}
         onChange={(ev) => {
           const { value } = ev.target;
@@ -85,7 +87,8 @@ const Edit = () => {
         type="text"
         name="url"
         id="url"
-        // value={recipes.imgurl || ""}
+        // defalutvalue={recipes.imgurl || ""}
+        defaultValue={recipes.imgurl ? recipes.imgurl : ""}
         onChange={(ev) => {
           const { value } = ev.target;
           setEditRecipe({
@@ -99,6 +102,7 @@ const Edit = () => {
         name="recipe"
         id="recipe"
         // value={recipes.recipe}
+        defaultValue={recipes.recipe ? recipes.recipe : ""}
         cols="40"
         rows="10"
         onChange={(ev) => {
